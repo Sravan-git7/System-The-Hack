@@ -939,7 +939,10 @@
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
-        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          box-shadow 0.2s;
         text-decoration: none;
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
@@ -952,7 +955,14 @@
     </style>
   </head>
   <body>
-    <button type="button" class="back-btn" id="back-btn" aria-label="Back to Home">← Back</button>
+    <button
+      type="button"
+      class="back-btn"
+      id="back-btn"
+      aria-label="Back to Home"
+    >
+      ← Back
+    </button>
     <div id="app">
       <!-- TOP ROW -->
       <div id="top-row">
@@ -3727,7 +3737,8 @@
         if (renderer) {
           renderer.dispose();
           const canvas = renderer.domElement;
-          if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+          if (canvas && canvas.parentNode)
+            canvas.parentNode.removeChild(canvas);
         }
         window.location.href = "/";
       });

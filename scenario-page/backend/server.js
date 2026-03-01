@@ -286,49 +286,8 @@ function generatePerformance(metrics, history) {
 }
 
 /* ===============================
-   API ROUTES
+   API ROUTE
 ================================*/
-
-/**
- * Apply policy with weighted causal matrix + stochastic events.
- * Returns new metrics and optional stochastic event.
- */
-app.post('/api/apply-policy', (req, res) => {
-  try {
-    const { metrics, policy, turn = 1 } = req.body;
-    if (!metrics || !policy?.impacts)
-      return res.status(400).json({ error: "Missing metrics or policy.impacts" });
-
-    const { metrics: newMetrics, stochasticEvent } = applyPolicyWithCausalMatrix(
-      metrics,
-      policy.impacts,
-      turn
-    );
-
-    const vals = Object.values(newMetrics);
-    let status = "playing";
-    if (vals.filter((v) => v < 20).length >= 2) status = "lost";
-    else if (
-      newMetrics.employment >= WIN_CONDITION.employment &&
-      newMetrics.economy >= WIN_CONDITION.economy &&
-      newMetrics.publicHappiness >= WIN_CONDITION.publicHappiness &&
-      newMetrics.inequality <= WIN_CONDITION.inequality &&
-      newMetrics.governmentBudget >= WIN_CONDITION.governmentBudget
-    )
-      status = "won";
-
-    res.json({
-      metrics: newMetrics,
-      status,
-      stochasticEvent: stochasticEvent
-        ? { name: stochasticEvent.name, impacts: stochasticEvent.impacts }
-        : null,
-    });
-  } catch (err) {
-    console.error("❌ apply-policy ERROR:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
 
 app.post('/api/generate-interventions', async (req, res) => {
 
@@ -398,7 +357,6 @@ ${chosenPolicy?.description}
 
 Recent Decisions:
 ${historyText}
-${buildFeedbackContext(decisionHistory)}
 
 Turn ${turn}/10
 

@@ -359,4 +359,4 @@ export const SystemCore = React.memo<SystemCoreProps>(({
     );
 });
 
-useGLTF.preload('/src/assets/futuristic_cube.glb');
+useGLTF.preload('/models/futuristic_cube.glb');
