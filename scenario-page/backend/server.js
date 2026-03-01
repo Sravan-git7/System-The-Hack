@@ -502,6 +502,10 @@ Provide a brief 1-2 sentence explanation of what this decision implies: the stra
    SERVER START
 ================================*/
 
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully 🚀');
+});
+
 app.listen(PORT, () => {
   console.log(
     `✅ Scenario API running at http://localhost:${PORT}`
